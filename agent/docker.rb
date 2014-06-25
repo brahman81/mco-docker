@@ -22,11 +22,13 @@ MCollective::Util.loadclass("MCollective::Util::Docker")
 module MCollective
     module Agent
         class Docker<RPC::Agent
-            action "images" do
-                begin
-                    reply[:status] = run("docker images #{request[:options]}", :stdout => :out, :stderr => :err, :chomp => true)
-                rescue => error
-                    reply.fail! "error: #{error}"
+            ["history", "images", "info", "ps", "pull"].each do |command|
+                action command do
+                    begin
+                        reply[:status] = run("docker #{command} #{request[:options]}", :stdout => :out, :stderr => :err, :chomp => true)
+                    rescue => error
+                        reply.fail! "error: #{error}"
+                    end
                 end
             end
         end

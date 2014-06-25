@@ -23,20 +23,22 @@ metadata    :name        => "Docker Mcollective Agent",
             :url         => "https://github.com/brahman81/mco-docker",
             :timeout     => 60
 
-action "images", :description => "retrieve a list of available images" do
-    display :always  # supported in 0.4.7 and newer only
+["history", "images", "info", "ps", "pull"].each do |command|
+    action command, :description => "docker #{command}" do
+        display :always  # supported in 0.4.7 and newer only
 
-    input   :options,
-            :prompt      => "docker cli options",
-            :description => "optional command line options",
-            :type        => :string,
-            :validation  => ".",
-            :optional    => true,
-            :maxlength   => 0, # no limit use with caution
-            :default     => ""
+        input   :options,
+                :prompt      => "docker cli options",
+                :description => "optional command line options, see docker help #{command}",
+                :type        => :string,
+                :validation  => ".",
+                :optional    => true,
+                :maxlength   => 0, # no limit use with caution
+                :default     => ""
 
-    output  :reply,
-            :description => "command output",
-            :display_as  => "command output",
-            :default     => "n/a"
+        output  :reply,
+                :description => "command output",
+                :display_as  => "command output",
+                :default     => "n/a"
+    end
 end
