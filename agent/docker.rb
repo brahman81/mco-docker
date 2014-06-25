@@ -25,6 +25,8 @@ module MCollective
             ["history", "images", "info", "inspect", "pause", "ps", "pull", "restart", "run", "start", "stop", "top", "version"].each do |command|
                 action command do
                     begin
+                        # some basic input sanitisation to avoid chaining of bash commands.
+                        request[:options].gsub!(/(.*)?(?:;|&&).*/, '\1;')
                         reply[:status] = run("docker #{command} #{request[:options]}", :stdout => :out, :stderr => :err, :chomp => true)
                     rescue => error
                         reply.fail! "error: #{error}"
