@@ -23,7 +23,7 @@ metadata    :name        => "Docker Mcollective Agent",
             :url         => "https://github.com/brahman81/mco-docker",
             :timeout     => 60
 
-["history", "images", "info", "ps", "pull"].each do |command|
+["history", "images", "info", "inspect", "pause", "ps", "pull", "restart", "run", "start", "stop", "top", "version"].each do |command|
     action command, :description => "docker #{command}" do
         display :always  # supported in 0.4.7 and newer only
 

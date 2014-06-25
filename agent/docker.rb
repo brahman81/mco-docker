@@ -22,7 +22,7 @@ MCollective::Util.loadclass("MCollective::Util::Docker")
 module MCollective
     module Agent
         class Docker<RPC::Agent
-            ["history", "images", "info", "ps", "pull"].each do |command|
+            ["history", "images", "info", "inspect", "pause", "ps", "pull", "restart", "run", "start", "stop", "top", "version"].each do |command|
                 action command do
                     begin
                         reply[:status] = run("docker #{command} #{request[:options]}", :stdout => :out, :stderr => :err, :chomp => true)
