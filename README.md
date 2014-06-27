@@ -28,5 +28,6 @@ You will get most help from reading the docker command line tool documentation.
 http://docs.docker.com/reference/commandline/cli/
 
 ### TODO
+- improve application/docker.rb
 - add more actions
 - improve documentation
