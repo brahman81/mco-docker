@@ -16,38 +16,38 @@
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 module MCollective
-  class Application
-    class Docker<MCollective::Application
-        option :options,
-        :description    => "docker cli options",
-        :arguments      => ["--options OPTIONS", "-o OPTIONS"]
+    class Application
+        class Docker<MCollective::Application
+            option :options,
+                :description    => "docker cli options",
+                :arguments      => ["--options OPTIONS", "-o OPTIONS"]
 
-        def post_option_parser(configuration)
-        configuration[:command] = ARGV.shift if ARGV.size > 0
-        end
+            def post_option_parser(configuration)
+                configuration[:command] = ARGV.shift if ARGV.size > 0
+            end
 
-        def main
-        docker = rpcclient("docker")
-        unless configuration[:options].nil? then
-            resp = docker.send("#{configuration[:command]}", :options => "#{configuration[:options]}")
-        else
-            resp = docker.send("#{configuration[:command]}")
-        end
-        resp.each do |result|
-            if result[:data][:status] > 0 then
-                # there was an error, exit with non 1 exit status
-                puts result[:data][:err]
-                puts result[:data][:out]
-                exit 1
-            else
-                puts "host: #{result[:sender]}"
-                result[:data][:out].each do |line|
-                    puts line
+            def main
+                docker = rpcclient("docker")
+                unless configuration[:options].nil? then
+                    resp = docker.send("#{configuration[:command]}", :options => "#{configuration[:options]}")
+                else
+                    resp = docker.send("#{configuration[:command]}")
                 end
+                resp.each do |result|
+                    if result[:data][:status] > 0 then
+                        # there was an error, exit with non 1 exit status
+                        puts result[:data][:err]
+                        puts result[:data][:out]
+                        exit 1
+                    else
+                        puts "host: #{result[:sender]}"
+                        result[:data][:out].each do |line|
+                            puts line
+                        end
+                    end
+                end
+                printrpcstats :summarize => true, :caption => "%s results" % configuration[:command]
             end
         end
-        printrpcstats :summarize => true, :caption => "%s results" % configuration[:command]
-      end
     end
-  end
 end
