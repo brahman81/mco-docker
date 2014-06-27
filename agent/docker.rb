@@ -26,7 +26,9 @@ module MCollective
                 action command do
                     begin
                         # some basic input sanitisation to avoid chaining of bash commands.
-                        request[:options].gsub!(/(.*)?(?:;|&&).*/, '\1;')
+                        unless request[:options].nil? then
+                            request[:options].gsub!(/(.*)?(?:;|&&).*/, '\1;')
+                        end
                         reply[:status] = run("docker #{command} #{request[:options]}", :stdout => :out, :stderr => :err, :chomp => true)
                     rescue => error
                         reply.fail! "error: #{error}"
