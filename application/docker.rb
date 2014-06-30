@@ -36,11 +36,12 @@ module MCollective
                 resp.each do |result|
                     if result[:data][:status] > 0 then
                         # there was an error, exit with non 1 exit status
-                        puts result[:data][:err]
-                        puts result[:data][:out]
-                        exit 1
+                        unless result[:data][:err].to_s == '' then
+                            puts result[:data][:err]
+                            next
+                        end
                     else
-                        puts "host: #{result[:sender]}"
+                        puts "\nHOST: #{result[:sender]}\n\n"
                         result[:data][:out].each do |line|
                             puts line
                         end
