@@ -22,7 +22,21 @@ MCollective::Util.loadclass("MCollective::Util::Docker")
 module MCollective
     module Agent
         class Docker<RPC::Agent
-            ["history", "images", "info", "inspect", "pause", "ps", "pull", "restart", "run", "start", "stop", "top", "version"].each do |command|
+            [
+                "history",
+                "images",
+                "info",
+                "inspect",
+                "pause",
+                "ps",
+                "pull",
+                "restart",
+                "run",
+                "start",
+                "stop",
+                "top",
+                "version"
+            ].each do |command|
                 action command do
                     begin
                         # some basic input sanitisation to avoid chaining of bash commands.
