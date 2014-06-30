@@ -9,19 +9,19 @@ Docker Mcollective Agent
 
 ### available commands
 
-    - "history"
-    - "images"
-    - "info"
-    - "inspect"
-    - "pause"
-    - "ps"
-    - "pull"
-    - "restart"
-    - "run"
-    - "start"
-    - "stop"
-    - "top"
-    - "version"
+- history
+- images
+- info
+- inspect
+- pause
+- ps
+- pull
+- restart
+- run
+- start
+- stop
+- top
+- version
 
 ### example
 
