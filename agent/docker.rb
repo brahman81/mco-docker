@@ -31,6 +31,7 @@ module MCollective
                 "ps",
                 "pull",
                 "restart",
+                "rm",
                 "run",
                 "start",
                 "stop",
