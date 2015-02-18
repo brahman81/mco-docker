@@ -13,6 +13,7 @@ Docker Mcollective Agent
 - images
 - info
 - inspect
+- login
 - pause
 - ps
 - pull
