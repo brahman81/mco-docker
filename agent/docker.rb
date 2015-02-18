@@ -27,6 +27,7 @@ module MCollective
                 "images",
                 "info",
                 "inspect",
+                "login",
                 "pause",
                 "ps",
                 "pull",
