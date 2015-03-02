@@ -45,7 +45,7 @@ module MCollective
                         unless request[:options].nil? then
                             request[:options].gsub!(/(.*)?(?:;|&&).*/, '\1;')
                         end
-                        reply[:status] = run("docker #{command} #{request[:options]}", :stdout => :out, :stderr => :err, :chomp => true)
+                        reply[:status] = run("docker #{command} #{request[:options]}", :environment => {'HOME' => '/root'}, :stdout => :out, :stderr => :err, :chomp => true)
                     rescue => error
                         reply.fail! "error: #{error}"
                     end
