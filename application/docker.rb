@@ -42,7 +42,7 @@ module MCollective
                         end
                     else
                         puts "\nHOST: #{result[:sender]}\n\n"
-                        result[:data][:out].each do |line|
+                        result[:data][:out].each_line do |line|
                             puts line
                         end
                     end
